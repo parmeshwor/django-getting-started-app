@@ -1,0 +1,47 @@
+$ python -m django --version
+$ django-admin startproject mysite
+# don't name projects after built-in django objects
+# don't put django code inside document root eg. /var/www, not safe.
+
+# django project structure
+
+mysite/  # root directory and container of project. you can rename it
+  manage.py  # command line utility to interact with django
+  mysite/  # actual python package for project
+    __init__.py  #  makes any directory a python package
+    settings.py  # project configuration goes here
+    urls.py  # url declarations; table of content of your site
+    asgi.py  # entry-point for ASGI-compatible web servers
+    wsgi.py  # entry-point for WSGI-compatible web servers
+
+$ python manage.py runserver    # run django application
+$ python manage.py migrate  # apply migration
+
+# django development server is written purely in python
+$ python manage.py runserver 9090 # listen on specific port
+$ python manage.py runserver 0:9090 # listen on all available public ip
+
+# project and apps : app is web application. project is collection of
+  configuration and app. an app can be in different projects.
+$ python manage.py startapp polls  # create app within project
+
+polls/
+  __init__.py
+  admin.py
+  apps.py
+  models.py
+  tests.py
+  views.py
+  migrations/
+    __init__.py
+# to call the view, we need to map it to a URL - and for this we need a URLconf
+
+# you should always use include() when you include other URL patterns.
+  only exception to this is admin.site.urls
+# path() function is passed four arguments. two required (route,view), two optional(kwargs, name)
+  route : a string that contains URL pattern. django starts at first pattern and goes down list
+  view : django calls view object with HttpRequest object and any captured key arguments
+  kwargs : optional and not used in django tutorial
+  name : name of the url (it can be any name )
+
+
